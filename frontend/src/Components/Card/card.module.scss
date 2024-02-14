@@ -1,0 +1,32 @@
+@import "./../App/vars.scss";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: $bgCard-color;
+    border-radius: 12px;
+
+    & > *:not(:last-child) {
+        margin-bottom: 30px;
+    }
+}
+
+.img {
+    width: 275px;
+    height: 210px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.button {
+    padding: 20px;
+    background-color: $brand-color;
+    border-radius: 12px;
+}

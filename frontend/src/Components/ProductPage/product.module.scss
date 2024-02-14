@@ -1,0 +1,36 @@
+.section {
+    margin-bottom: 80px;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+.img {
+    display: block;
+    width: 483px;
+    height: 315px;
+    margin-right: 50px;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+
+.tab_button_wrapper {
+    margin-bottom: 30px;
+}
+
+.tab_button {
+    font-weight: 600;
+    line-height: 29px;
+    letter-spacing: 0em;
+    margin-right: 30px;
+    padding: 10px 15px;
+    border: 1px solid #000000;
+}
+
+.tab_content {
+    width: 70%;
+}

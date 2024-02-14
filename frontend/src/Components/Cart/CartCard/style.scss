@@ -1,0 +1,36 @@
+@import "./../../App/vars.scss";
+
+.card {
+    display: flex;
+    padding: 20px;
+    background-color: $bgCard-color;
+    width: fit-content;
+    border: 1px solid #0000001A;
+
+    &__img {
+        width: 275px;
+        height: 210px;
+        margin-right: 60px;
+    }
+
+    &__title {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 39px;
+        margin-bottom: 20px;
+    }
+
+    &__info {
+        margin-right: 30px;
+    }
+
+    &__price {
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 44px;
+    }
+
+    &__date {
+        margin-bottom: 50px;
+    }
+}

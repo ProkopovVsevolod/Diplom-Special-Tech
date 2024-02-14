@@ -1,0 +1,54 @@
+
+
+.title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.wrapper {
+    min-width: 250px;
+    transition: 0.3s;
+    background-color: #FBFBFB;
+    color: #000;
+    padding: 20px 10px;
+    width: 15%;
+    margin-right: 2%;
+}
+
+.listItem {
+    font-size: 20px;    
+    padding: 12px 10px;
+    position: relative;
+    cursor: pointer;
+
+    &:not(:first-child) {
+        padding: 12px 10px;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    }
+
+    &:first-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.10);
+    }
+
+    & a {
+        color: #000;
+    }
+
+    &:after {
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        content: " ";
+        background-image: url("./../../assets/icons/arrow-sidebar.png");
+        background-size: cover;
+        background-position: center;
+        width: 15px;
+        height: 25px;
+    }
+}
+

@@ -1,0 +1,38 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    & a {
+        padding: 60px 60px 30px;
+        color: #000;
+        background-color: #FBFBFB;
+        flex-basis: calc((100% / 3) - 20px);
+            
+    
+        &:nth-child(1), &:nth-child(2), &:nth-child(3)  {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+        }
+    
+        &:nth-child(1), &:nth-child(2), &:nth-child(4), &:nth-child(5) {
+            border-right: 1px solid rgba(0, 0, 0, 0.10);
+        }
+    }
+
+    & h3 {
+        text-align: center;
+    }
+}
+
+.section {
+    margin-bottom: 90px;
+}
+
+.title {
+    margin-bottom: 50px;
+}
+
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

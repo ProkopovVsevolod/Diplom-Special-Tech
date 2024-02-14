@@ -1,0 +1,53 @@
+@import "./../App/vars.scss";
+
+.inputWrapper {
+    position: relative;
+    width: 50%;
+    margin-bottom: 40px;
+}
+
+.input {
+    width: 100%;
+    border-radius:5px;
+    border:2px solid #f2f2f2;
+    outline:none;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.title {
+    color: $brand-color;
+    font-size: 48px;
+    line-height: 58px;
+    margin-bottom: 40px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    position: absolute;
+    bottom: -25px;
+    color: red;
+    font-size: 16px;
+}
+
+.button {
+    padding: 20px;
+    background-color: $brand-color;
+    border-radius: 12px;
+    width: 50%;
+    align-items: center;
+}

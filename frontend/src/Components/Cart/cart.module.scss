@@ -1,0 +1,29 @@
+@import "./../App/vars.scss";
+
+.flex {
+    display: flex;
+}
+
+.buy {
+    border-radius: 12px;
+    height: fit-content;
+    padding: 30px 50px;
+    background-color: $bgCard-color;
+    margin-bottom: 30px;
+    border: 1px solid #0000001A;
+}
+
+.button {
+    display: block;
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 1px solid black;
+    color: black;
+}
+
+.wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-right: 5%;
+}

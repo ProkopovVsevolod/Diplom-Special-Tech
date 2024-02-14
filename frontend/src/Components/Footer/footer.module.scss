@@ -1,0 +1,36 @@
+@import "./../App/vars.scss";
+
+.footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 50px 5%;
+    display: flex;
+    justify-content: space-between;
+    color: #B4B4B4;
+    background-color: $footer-color;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.link {
+    color: #B4B4B4;
+    font-size: 20px;
+
+    &:hover {
+        color: white; 
+    }
+}
+
+.text {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.socialNetwork {
+
+}

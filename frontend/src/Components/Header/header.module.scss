@@ -1,0 +1,100 @@
+@import "./../App/vars.scss";
+
+.header {
+    padding: 30px 5%;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 50px;
+    background-color: $bgCard-color;
+    border-bottom: 1px solid #0000001A;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+
+    & span {
+        color: $brand-color;
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 600;
+    }
+
+    & a {
+        font-size: 20px;
+        color: #000;
+    }
+}
+
+.logo {
+    margin-right: 20%;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    li {
+        &:not(:last-child) {
+            margin-right: 10%;
+        }
+    
+        a {
+            
+        }
+    }
+}
+
+.links {
+    position: relative;
+    font-weight: 400;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -3px;
+        width: 0;
+        height: 2px;
+        background-color: black; 
+        transition: width 0.5s; 
+        z-index: 5;
+    }
+    
+    &:hover::after {
+        content: "";
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        height: 2px;
+        background-color: $brand-color; 
+        transition: width 0.5s;
+        z-index: 5;  
+    }
+}
+
+.icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 40px;
+    height: 28px;
+
+    &:not(:last-child) {
+        margin-right: 15px;
+    }
+}
+
+.person {
+    position: relative;
+    background-image: url("./../../assets/icons/person.png");
+}
+
+.cart {
+    background-image: url("./../../assets/icons/Cart.png");
+}
+
