@@ -2,14 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MainPage from "../MainPage/MainPage";
-import "./reset.scss";
-import "./base.scss";
 import Product from '../ProductPage/ProductPage';
 import Registration from '../AuthPage/Registration';
 import Authorization from '../AuthPage/Authorization';
-import { Breadcrumb } from 'react-bootstrap';
 import CatalogPage from '../СatalogPage/CatalogPage';
 import Cart from '../Cart/Cart';
+import "./reset.scss";
+import "./base.scss";
+import "./button.scss";
 
 
 const App = () => {
