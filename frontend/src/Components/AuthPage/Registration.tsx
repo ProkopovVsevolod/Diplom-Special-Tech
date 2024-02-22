@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import styles from "./auth.module.scss";
 import { FC } from "react";
 import { AuthService } from "../../services/auth.service";
 import { IAuthData } from "../../interfaces/auth.interface";
+import styles from "./auth.module.scss";
 
 // // ^((\+7|7|8)+([0-9]){10})$
-const Registration: FC = () => {
+const Registration = () => {
     const { register, handleSubmit, formState: {errors} } = useForm<IAuthData>({
         mode: 'onChange'
     });
