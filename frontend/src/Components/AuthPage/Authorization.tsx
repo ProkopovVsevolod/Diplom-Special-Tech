@@ -22,15 +22,15 @@ const Authorization: FC = () => {
 
                 <div className={styles.inputWrapper}>
                     <input placeholder="Почта" className={styles.input}{
-                        ...register("email", {
+                        ...register("login", {
                             required: "Почта обязательна для заполнения",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-                                message: "Введите корректный Email"
-                            }
+                            // pattern: {
+                            //     value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+                            //     message: "Введите корректный Email"
+                            // }
                         })} 
                         type="email"/>
-                    {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+                    {errors.login && <p className={styles.error}>{errors.login.message}</p>}
                 </div>
 
                 
@@ -38,10 +38,10 @@ const Authorization: FC = () => {
                     <input placeholder="Пароль" className={styles.input}{
                         ...register("password", {
                             required: "Пароль обязателен для заполнения",
-                            pattern: {
-                                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                                message: "Пароль должен быть > 8 символов"
-                            },
+                            // pattern: {
+                            //     value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+                            //     message: "Пароль должен быть > 8 символов"
+                            // },
                         })} 
                         type="password"
                     />

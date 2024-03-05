@@ -24,7 +24,7 @@ namespace SpecialEquipmentStore
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=SpecialEquipmentStore;Username=postgres;Password=user1");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=SpecialEquipmentStore;Username=postgres;Password=1501");
         }
     }
 }

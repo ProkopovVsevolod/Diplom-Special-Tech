@@ -26,7 +26,7 @@ namespace SpecialEquipmentStore.Controllers
         /// <exception cref="Exception">Исключение: уже зарегистрированный пользователь</exception>
         [HttpPost]
         [Route("Register")]
-        public async Task Register(UserDto userData)
+        public async Task Register([FromBody]UserDto userData)
         {
             var user = await _userBusiness.Authorize(userData);
             if (user != null)
@@ -41,7 +41,7 @@ namespace SpecialEquipmentStore.Controllers
         /// <exception cref="Exception">Исключение: пользователь не найден</exception>
         [HttpPost]
         [Route("Login")]
-        public async Task<UserDto> Login(UserDto userData)
+        public async Task<UserDto> Login([FromBody]UserDto userData)
         {
             var user = await _userBusiness.Authorize(userData);
             if (user == null)

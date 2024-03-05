@@ -23,7 +23,29 @@
 
 .wrapper {
     display: flex;
+    flex-direction: column;
     gap: 20px;
     flex-wrap: wrap;
     margin-right: 5%;
+}
+
+.form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        margin-bottom: 25px;
+    }
+}
+
+.price {
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 16px;
 }

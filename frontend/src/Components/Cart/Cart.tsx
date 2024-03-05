@@ -13,18 +13,34 @@ const CartElements = [
 const Cart: FC = () => {
     return (
         <div className={styles.flex}>
+            
+
+            
+
+            
+            <form className={styles.form}>
+                <p>Контактные данные</p>
+
+                <input className={styles.input} type="text" placeholder="Имя"/>
+                <input className={styles.input} type="text" placeholder="Фамилия"/>
+                <input className={styles.input} type="text" placeholder="Номер телефона"/>
+                <input className={styles.input} type="email" placeholder="Email"/>
+
+            </form>
+
             <div className={styles.wrapper}>
                 {CartElements.map(card => {
                     return <CardCart card={card}/>
                 })}
-            </div>
 
-            <div className={styles.buy}>
-                <p className={styles.price}>Итого: <span>29 697 ₽</span></p>
-                <Link className={styles.button} to={"/"}>Оформить</Link>
+                <div className={styles.buy}>
+                    <p className={styles.price}>Итого: <span>29 697 ₽</span></p>
+                    <Link className={styles.button} to={"/"}>Оформить</Link>
+                </div>
             </div>
         </div>
-        
+
+
     );
 }
  

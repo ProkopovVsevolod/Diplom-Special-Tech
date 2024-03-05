@@ -6,6 +6,9 @@ import ProductImg from "./../../assets/tech-img.png"
 import Breadcrumbs from "../../ui-kit/Breadcrumbs/Breadcrumbs";
 import 'react-calendar/dist/Calendar.css';
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { ProductSercvices } from "../../services/product.service";
+import { useQuery } from "@tanstack/react-query";
 
 const CalendarWrapper = styled.div`
     max-width: 600px;
@@ -23,9 +26,9 @@ const CalendarWrapper = styled.div`
 `
 
 const disabledDates = [
-    new Date('2024-02-25'),
-    new Date('2024-02-26'),
-    new Date('2024-02-27')
+    new Date('2024-05-25'),
+    new Date('2024-05-26'),
+    new Date('2024-05-27')
   ];
 
   type ValuePiece = Date | null;
@@ -34,53 +37,64 @@ const disabledDates = [
 
 const ProductPage: FC = () => {
 
+    const { id } = useParams<{id:string}>();
+
     const [value, onChange] = useState<Value>(new Date());
+
+    const { isFetching, data: techData, error} = useQuery({
+        queryKey: [`${id}`],
+        queryFn: () => { 
+            if(id) {
+                return ProductSercvices.getTechById(id)
+            }},
+        enabled: !!id
+    })
 
     return (
         <section className={styles.section}>
             <Breadcrumbs />
-            <h1 className={styles.title}></h1>
 
-            <div className={styles.row}>
-                <img className={styles.img} src={ProductImg} alt={`Изображение ${"Boomag 33"}`} />
+            {isFetching ? <h1>Загрузка данных товара</h1> : <></>}
+            {techData ?
+            <>
+                <h1 className={styles.title}>{techData.name}</h1>
 
-                <div>
-                    <span>Масса 15 700 кг</span>
-                    <span>Масса 15 700 кг</span>
-                    <span>Масса 15 700 кг</span>
-                    <span>Масса 15 700 кг</span>
+                <div className={styles.row}>
+                    <img className={styles.img} src={ProductImg} alt={`Изображение ${"Boomag 33"}`} />
 
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Quam totam, officiis similique vel sit alias omnis laudantium quas 
-                        libero quisquam ab? Laudantium facilis beatae amet. Impedit vel 
-                        accusantium maiores. Perspiciatis.
-                    </p>
-                </div>
-            </div>
+                    <div className={styles.characterCol}>
+                        <p>{techData.сharacteristic}</p>
+                        <p>Цена за смену: {techData.price} руб</p>
 
-            <div className={styles.row}>
-                <div>
-                    <div className={styles.tab_button_wrapper}>
-                        <button className={styles.tab_button}>Описание</button>
-                        <button className={styles.tab_button}>Характеристики</button>
+                        <button className={styles.button}>Добавить в заказ</button>
                     </div>
+                    
 
-                    <div className={styles.tab_content}>
-                        <Description />
-                    </div>
                 </div>
 
-                <CalendarWrapper>
-                    <Calendar 
-                        value={value}
-                        onChange={onChange}
-                        tileDisabled={({ date, view }) =>
-                            view === 'month' && disabledDates.some(d => d.getDate() === date.getDate())
-                        }
-                    />
-                </CalendarWrapper>
-            </div>
+                <div className={styles.row}>
+                    <div>
+                        <div className={styles.tab_button_wrapper}>
+                            <button className={styles.tab_button}>Описание</button>
+                            <button className={styles.tab_button}>Характеристики</button>
+                        </div>
+
+                        <div className={styles.tab_content}>
+                            <Description />
+                        </div>
+                    </div>
+
+                    <CalendarWrapper>
+                        <Calendar 
+                            value={value}
+                            onChange={onChange}
+                            tileDisabled={({ date, view }) =>
+                                view === 'month' && disabledDates.some(d => d.getDate() === date.getDate())
+                            }
+                        />
+                    </CalendarWrapper>
+                </div>
+            </> : <p>Ошибка получения данных</p>}
         </section>
     );
 }

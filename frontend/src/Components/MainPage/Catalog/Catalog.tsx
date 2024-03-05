@@ -19,7 +19,7 @@ interface ITech {
     url: string;
 }
 
-const techArray = [
+const techArray: ITech[] = [
     {id: "liftTrucks", title: "Погрузчики", url: liftTruckIMG},
     {id: "dumpTrucks", title: "Самосвалы", url: dumpTrucksIMG},
     {id: "roadRinks", title: "Катки", url: roadRinksIMG},

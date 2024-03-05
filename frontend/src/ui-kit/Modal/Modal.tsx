@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IModalParametres } from "../../interfaces/modal";
+import { IModalParametres } from "../../interfaces/modal.intefaces";
 import "./style.scss";
 
 const Modal:FC<IModalParametres> = ({active, setActive, children}) => {

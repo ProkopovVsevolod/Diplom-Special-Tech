@@ -1,12 +1,20 @@
 import { FC } from "react";
+import { ICardData } from "../../interfaces/tech.interfaces";
 import styles from "./card.module.scss";
-const Card: FC = () => {
+import { Link } from "react-router-dom";
+
+
+const Card: FC<{data: ICardData}> = ({data}) => {
+    const {name, price, id} = data;
+    console.log(data)
+
     return (
-        <div className={styles.wrapper}>
+        <Link to={`tech/${id}`} key={id} className={styles.wrapper}>
             <img  className={styles.img} src="" alt={`Изображение `} />
-            <h3 className={styles.title}>Price</h3>
-            <button className={styles.button}>Добавить в заказ</button>
-        </div>
+            <h3 className={styles.title}>{name}</h3>
+            <p>{price} за смену</p>
+            <p className={styles.button}>Добавить в заказ</p>
+        </Link>
     );
 }
  

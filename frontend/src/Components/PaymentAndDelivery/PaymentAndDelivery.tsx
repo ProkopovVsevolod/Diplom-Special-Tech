@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import Modal from "../../ui-kit/Modal/Modal";
-import { IModalParametres } from "../../interfaces/modal";
+import { IModalParametres } from "../../interfaces/modal.intefaces";
 import Accordion from "./Accordion";
 import { title } from "process";
 
