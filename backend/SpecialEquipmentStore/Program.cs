@@ -1,14 +1,9 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SpecialEquipmentStore.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
 namespace SpecialEquipmentStore
 {
     public class Program
@@ -51,7 +46,7 @@ namespace SpecialEquipmentStore
                             Count = 10,
                             Price = 1000,
                             Сharacteristic = "Масса: 5т; Высота: 35м",
-                            IdTypeOfTechnique = 1
+                            TypeOfTechniqueId = 1
                         }
                     ); 
                     db.SaveChanges();
@@ -62,12 +57,23 @@ namespace SpecialEquipmentStore
                     db.Order.Add(
                         new Order
                         {
-                            IdTechnique = 1,
-                            IdUser = 1,
+                            UserId = 1,
                             Phone = "88005553535",
                             Email = "qwe@qwe.ru",
                             Address = "ул. Московское шоссе, лит.Б",
                             Date = DateTime.Now
+                        }
+                    );
+                    db.SaveChanges();
+                }
+
+                if (!db.OrderTechnique.Any())
+                {
+                    db.OrderTechnique.Add(
+                        new OrderTechnique
+                        {
+                            TechniqueId = 1,
+                            OrderId = 1
                         }
                     );
                     db.SaveChanges();

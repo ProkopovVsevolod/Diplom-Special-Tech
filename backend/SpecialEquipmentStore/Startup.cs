@@ -9,10 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SpecialEquipmentStore.Controllers;
 using SpecialEquipmentStore.Business;
 using SpecialEquipmentStore.Repositories;
@@ -70,6 +66,7 @@ namespace SpecialEquipmentStore
             builder.RegisterType<TechniqueRepository>().As<ITechniqueRepository>();
             builder.RegisterType<OrderBusiness>().As<IOrderBusiness>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
+            builder.RegisterType<OrderTechniqueRepository>().As<IOrderTechniqueRepository>();
 
 
             builder.RegisterType<SpecialEquipmentStoreDbContext>()

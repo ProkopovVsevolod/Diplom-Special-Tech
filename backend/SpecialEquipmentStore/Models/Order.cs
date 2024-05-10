@@ -15,16 +15,10 @@ namespace SpecialEquipmentStore.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Id техники
-        /// </summary>
-        [Required]
-        public int IdTechnique { get; set; }
-
-        /// <summary>
         /// Id пользователя
         /// </summary>
         [Required]
-        public int IdUser { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Телефон

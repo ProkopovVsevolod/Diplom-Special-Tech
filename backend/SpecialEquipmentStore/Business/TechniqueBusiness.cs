@@ -2,9 +2,7 @@
 using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpecialEquipmentStore.Business
@@ -30,7 +28,7 @@ namespace SpecialEquipmentStore.Business
         {
             var technique = _mapper.Map<Technique>(techniqueDto);
             await _techniqueRepository.AddTechnique(technique);
-            var newTechnique = _techniqueRepository.GetTechniqueById(techniqueDto.Id);
+            var newTechnique = await _techniqueRepository.GetTechniqueById(technique.Id);
             return _mapper.Map<TechniqueDto>(newTechnique);
         }
 
@@ -39,12 +37,7 @@ namespace SpecialEquipmentStore.Business
         {
             var oldTechnique = await _techniqueRepository.GetTechniqueById(techniqueDto.Id);
 
-            if (oldTechnique == null)
-            {
-                return null;
-            }
-
-            if (techniqueDto.Count < 0)
+            if (oldTechnique == null || techniqueDto.Count < 0)
             {
                 return null;
             }
@@ -53,7 +46,7 @@ namespace SpecialEquipmentStore.Business
             oldTechnique.Price = techniqueDto.Price;
             oldTechnique.Count = techniqueDto.Count;
             oldTechnique.Сharacteristic = techniqueDto.Сharacteristic;
-            oldTechnique.IdTypeOfTechnique = techniqueDto.IdTypeOfTechnique;
+            oldTechnique.TypeOfTechniqueId = techniqueDto.TypeOfTechniqueId;
 
             await _techniqueRepository.EditTechnique(oldTechnique);
             var newTechnique = await _techniqueRepository.GetTechniqueById(techniqueDto.Id);
@@ -77,24 +70,16 @@ namespace SpecialEquipmentStore.Business
         public async Task<IEnumerable<TechniqueDto>> GetTechniquesByTypeOfTechniqueId(int id)
         {
             var techniques = await _techniqueRepository.GetTechniquesByTypeOfTechniqueId(id);
-            var techniqueDtos = new List<TechniqueDto>();
-            foreach (var technique in techniques)
-            {
-                techniqueDtos.Add(_mapper.Map<TechniqueDto>(technique));
-            }
-            return techniqueDtos;
+            
+            return _mapper.Map<IEnumerable<TechniqueDto>>(techniques);
         }
 
         /// <inheritdoc/>
         public async Task<IEnumerable<TypeOfTechniqueDto>> GetTypesOfTechnique()
         {
             var typesOfTechnique = await _techniqueRepository.GetTypesOfTechnique();
-            var typeOfTechniqueDtos = new List<TypeOfTechniqueDto>();
-            foreach (var typeOfTechnique in typesOfTechnique)
-            {
-                typeOfTechniqueDtos.Add(_mapper.Map<TypeOfTechniqueDto>(typeOfTechnique));
-            }
-            return typeOfTechniqueDtos;
+            
+            return _mapper.Map<IEnumerable<TypeOfTechniqueDto>>(typesOfTechnique);
         }
     }
 }
