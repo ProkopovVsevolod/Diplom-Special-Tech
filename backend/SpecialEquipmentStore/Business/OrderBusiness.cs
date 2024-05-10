@@ -2,7 +2,6 @@
 using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,15 +15,18 @@ namespace SpecialEquipmentStore.Business
     {
         private readonly IOrderRepository _orderRepository;
         private readonly ITechniqueRepository _techniqueRepository;
+        private readonly IOrderTechniqueRepository _orderTechniqueRepository;
         private readonly IMapper _mapper;
 
         public OrderBusiness(
             IOrderRepository orderRepository,
             ITechniqueRepository techniqueRepository,
+            IOrderTechniqueRepository orderTechniqueRepository,
             IMapper mapper)
         {
             _orderRepository = orderRepository;
             _techniqueRepository = techniqueRepository;
+            _orderTechniqueRepository = orderTechniqueRepository;
             _mapper = mapper;
         }
 
@@ -33,20 +35,49 @@ namespace SpecialEquipmentStore.Business
         {
             var order = _mapper.Map<Order>(orderData);
             await _orderRepository.AddOrder(order);
-            var technique = await _techniqueRepository.GetTechniqueById(order.IdTechnique);
-            technique.Count -= 1;
-            await _techniqueRepository.EditTechnique(technique);
+
+            var techniqueIds = orderData.TechniqueIds;
+            foreach (var techniqueId in techniqueIds)
+            {
+                var technique = await _techniqueRepository.GetTechniqueById(techniqueId);
+                if (technique == null)
+                {
+                    continue;
+                }
+
+                technique.Count -= 1;
+                await _techniqueRepository.EditTechnique(technique);
+
+                await _orderTechniqueRepository.AddOrderTechnique(new OrderTechnique
+                {
+                    OrderId = order.Id,
+                    TechniqueId = technique.Id
+                });
+            }
+
             return await GetOrderById(order.Id);
         }
 
         /// <inheritdoc/>
         public async Task DeleteOrder(int id)
         {
+            var orderTechniques = await _orderTechniqueRepository.GetOrderTechniquesByOrderId(id);
+            foreach (var orderTechnique in orderTechniques)
+            {
+                var technique = await _techniqueRepository.GetTechniqueById(orderTechnique.TechniqueId);
+                if (technique == null)
+                {
+                    continue;
+                }
+
+                technique.Count += 1;
+                await _techniqueRepository.EditTechnique(technique);
+
+                await _orderTechniqueRepository.DeleteOrderTechnique(orderTechnique);
+            }
+
             var order = await _orderRepository.GetOrderById(id);
             await _orderRepository.DeleteOrder(order);
-            var technique = await _techniqueRepository.GetTechniqueById(order.IdTechnique);
-            technique.Count += 1;
-            await _techniqueRepository.EditTechnique(technique);
         }
 
         /// <inheritdoc/>
@@ -59,8 +90,23 @@ namespace SpecialEquipmentStore.Business
                 return null;
             }
 
-            oldOrder.IdTechnique = orderData.IdTechnique;
-            oldOrder.IdUser = orderData.IdUser;
+            var oldOrderTechniques = await _orderTechniqueRepository.GetOrderTechniquesByOrderId(oldOrder.Id);
+            foreach (var oldOrderTechnique in oldOrderTechniques)
+            {
+                await _orderTechniqueRepository.DeleteOrderTechnique(oldOrderTechnique);
+            }
+
+            var newOrderTechniques = orderData.TechniqueIds;
+            foreach (var newOrderTechnique in newOrderTechniques)
+            {
+                await _orderTechniqueRepository.AddOrderTechnique(new OrderTechnique
+                {
+                    OrderId = oldOrder.Id,
+                    TechniqueId = newOrderTechnique
+                });
+            }
+
+            oldOrder.UserId = orderData.UserId;
             oldOrder.Phone = orderData.Phone;
             oldOrder.Email = orderData.Email;
             oldOrder.Address = orderData.Address;
@@ -80,7 +126,12 @@ namespace SpecialEquipmentStore.Business
                 return null;
             }
 
-            return _mapper.Map<OrderDto>(order);
+            var orderDto = _mapper.Map<OrderDto>(order);
+
+            var orderTechniques = await _orderTechniqueRepository.GetOrderTechniquesByOrderId(id);
+            orderDto.TechniqueIds = orderTechniques.Select(ot => ot.TechniqueId);
+
+            return orderDto;
         }
 
         /// <inheritdoc/>
@@ -91,7 +142,12 @@ namespace SpecialEquipmentStore.Business
             var orderDtos = new List<OrderDto>();
             foreach (var order in orders)
             {
-                orderDtos.Add(_mapper.Map<OrderDto>(order));
+                var orderDto = _mapper.Map<OrderDto>(order);
+
+                var orderTechniques = await _orderTechniqueRepository.GetOrderTechniquesByOrderId(order.Id);
+                orderDto.TechniqueIds = orderTechniques.Select(ot => ot.TechniqueId);
+
+                orderDtos.Add(orderDto);
             }
 
             return orderDtos;
@@ -102,7 +158,7 @@ namespace SpecialEquipmentStore.Business
         {
             var userOrders = await _orderRepository.GetOrdersByUserId(id);
 
-            if (userOrders == null)
+            if (!userOrders.Any())
             {
                 return null;
             }
@@ -110,7 +166,12 @@ namespace SpecialEquipmentStore.Business
             var orderDtos = new List<OrderDto>();
             foreach (var order in userOrders)
             {
-                orderDtos.Add(_mapper.Map<OrderDto>(order));
+                var orderDto = _mapper.Map<OrderDto>(order);
+
+                var orderTechniques = await _orderTechniqueRepository.GetOrderTechniquesByOrderId(order.Id);
+                orderDto.TechniqueIds = orderTechniques.Select(ot => ot.TechniqueId);
+
+                orderDtos.Add(orderDto);
             }
 
             return orderDtos;

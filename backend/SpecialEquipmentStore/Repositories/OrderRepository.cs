@@ -1,8 +1,6 @@
-﻿using AutoMapper;
+﻿using Microsoft.EntityFrameworkCore;
 using SpecialEquipmentStore.Contracts;
-using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,25 +43,25 @@ namespace SpecialEquipmentStore.Business
         /// <inheritdoc/>
         public async Task<Order> GetOrderById(int id)
         {
-            return _specialEquipmentStoreDbContext.Order
-                .FirstOrDefault(o => o.Id == id);
+            return await _specialEquipmentStoreDbContext.Order
+                .FirstOrDefaultAsync(o => o.Id == id);
         }
 
         /// <inheritdoc/>
         public async Task<IEnumerable<Order>> GetOrders()
         {
-            return _specialEquipmentStoreDbContext.Order
+            return await _specialEquipmentStoreDbContext.Order
                 .Select(o => o)
-                .ToList();
+                .ToListAsync();
         }
 
         /// <inheritdoc/>
         public async Task<IEnumerable<Order>> GetOrdersByUserId(int id)
         {
-            return _specialEquipmentStoreDbContext.Order
-                .Where(o => o.IdUser == id)
+            return await _specialEquipmentStoreDbContext.Order
+                .Where(o => o.UserId == id)
                 .Select(o => o)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

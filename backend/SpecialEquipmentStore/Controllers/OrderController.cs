@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using Microsoft.AspNetCore.Mvc;
-using SpecialEquipmentStore.Models;
-using System.Collections.Generic;
 
 namespace SpecialEquipmentStore.Controllers
 {
@@ -24,87 +22,139 @@ namespace SpecialEquipmentStore.Controllers
         /// <summary>
         /// Получить все заказы
         /// </summary>
-        /// <exception cref="Exception">Исключение: не удалось получить заказы</exception>
         [HttpGet]
         [Route("GetOrders")]
-        public async Task<IEnumerable<OrderDto>> GetOrders()
+        public async Task<IActionResult> GetOrders()
         {
             var orders = await _orderBusiness.GetOrders();
+
             if (orders == null)
-                throw new Exception("Не удалось получить заказы!");
-            return orders;
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось получить заказы!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(orders);
         }
 
         /// <summary>
         /// Получить заказ по Id пользователя
         /// </summary>
         /// <param name="id">id пользователя</param>
-        /// <exception cref="Exception">Исключение: не удалось получить заказы</exception>
         [HttpGet]
         [Route("GetOrdersByUserId/{id}")]
-        public async Task<IEnumerable<OrderDto>> GetOrdersByUserId(int id)
+        public async Task<IActionResult> GetOrdersByUserId(int id)
         {
             var orders = await _orderBusiness.GetOrdersByUserId(id);
+
             if (orders == null)
-                throw new Exception("Не удалось получить заказы!");
-            return orders;
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось получить заказы!",
+                    ContentType = "plain/text",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(orders);
         }
 
         /// <summary>
         /// Получить заказ по его Id 
         /// </summary>
         /// <param name="id">id заказа</param>
-        /// <exception cref="Exception">Исключение: не удалось получить заказы</exception>
         [HttpGet]
         [Route("GetOrderById/{id}")]
-        public async Task<OrderDto> GetOrderById(int id)
+        public async Task<IActionResult> GetOrderById(int id)
         {
             var order = await _orderBusiness.GetOrderById(id);
+
             if (order == null)
-                throw new Exception("Не удалось получить заказ!");
-            return order;
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось получить заказы!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(order);
         }
 
         /// <summary>
         /// Добавить заказ
         /// </summary>
         /// <param name="orderData">Данные заказа</param>
-        /// <exception cref="Exception">Исключение: не удалось добавить заказ</exception>
         [HttpPost]
         [Route("AddOrder")]
-        public async Task<OrderDto> AddOrder(OrderDto orderData)
+        public async Task<IActionResult> AddOrder([FromBody] OrderDto orderData)
         {
             var order = await _orderBusiness.AddOrder(orderData);
+
             if (order == null)
-                throw new Exception("Не удалось добавить заказ!");
-            return order;
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось добавить заказ!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(order);
         }
 
         /// <summary>
         /// Редактировать заказ
         /// </summary>
         /// <param name="orderData">Данные заказа</param>
-        /// <exception cref="Exception">Исключение: не удалось редактировать заказ</exception>
         [HttpPost]
         [Route("EditOrder")]
-        public async Task<OrderDto> EditOrder(OrderDto orderData)
+        public async Task<IActionResult> EditOrder([FromBody] OrderDto orderData)
         {
             var order = await _orderBusiness.EditOrder(orderData);
             if (order == null)
-                throw new Exception("Не удалось редактировать заказ!");
-            return order;
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось редактировать заказ!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(order);
         }
 
         /// <summary>
         /// Удалить заказ
         /// </summary>
         /// <param name="id">Id заказа</param>
-        /// <exception cref="Exception">Исключение: не удалось удалить заказ</exception>
         [HttpPost]
         [Route("DeleteOrder")]
-        public async Task DeleteOrder(int id)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
-            await _orderBusiness.DeleteOrder(id);
+            try
+            {
+                await _orderBusiness.DeleteOrder(id);
+            }
+            catch (Exception e)
+            {
+                return new ContentResult
+                {
+                    Content = "Не удалось удалить заказ!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok();
         }
     }
 }

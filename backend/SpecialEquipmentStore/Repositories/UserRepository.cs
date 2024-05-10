@@ -1,7 +1,7 @@
-﻿using SpecialEquipmentStore.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,9 +30,16 @@ namespace SpecialEquipmentStore.Repositories
         /// <inheritdoc/>
         public async Task<User> GetUser(UserDto userDto)
         {
-            return _specialEquipmentStoreDbContext.User
-                .FirstOrDefault(user => user.Login == userDto.Login &&
+            return await _specialEquipmentStoreDbContext.User
+                .FirstOrDefaultAsync(user => user.Login == userDto.Login &&
                                         user.Password == userDto.Password);
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _specialEquipmentStoreDbContext.User.Select(u => u)
+                .ToListAsync();
         }
     }
 }

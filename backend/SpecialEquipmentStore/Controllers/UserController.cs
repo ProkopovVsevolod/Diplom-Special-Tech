@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace SpecialEquipmentStore.Controllers
 {
@@ -23,30 +24,70 @@ namespace SpecialEquipmentStore.Controllers
         /// Зарегистрировать пользователя
         /// </summary>
         /// <param name="userData">Данные пользователя</param>
-        /// <exception cref="Exception">Исключение: уже зарегистрированный пользователь</exception>
         [HttpPost]
         [Route("Register")]
-        public async Task Register(UserDto userData)
+        public async Task<IActionResult> Register([FromBody] UserDto userData)
         {
             var user = await _userBusiness.Authorize(userData);
+
             if (user != null)
-                throw new Exception("Данный пользователь уже зарегистрирован!");
+            {
+                return new ContentResult
+                {
+                    Content = "Данный пользователь уже зарегистрирован!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
             await _userBusiness.Register(userData);
+
+            return Ok();
         }
 
         /// <summary>
         /// Авторизовать пользователя
         /// </summary>
         /// <param name="userData">Данные пользователя</param>
-        /// <exception cref="Exception">Исключение: пользователь не найден</exception>
         [HttpPost]
         [Route("Login")]
-        public async Task<UserDto> Login(UserDto userData)
+        public async Task<IActionResult> Login([FromBody] UserDto userData)
         {
             var user = await _userBusiness.Authorize(userData);
+
             if (user == null)
-                throw new Exception("Пользователь не найден!");
-            return user;
+            {
+                return new ContentResult
+                {
+                    Content = "Пользователь не найден!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(user);
+        }
+
+        /// <summary>
+        /// Получить всех пользователей
+        /// </summary>
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userBusiness.GetAllUsers();
+
+            if (users == null)
+            {
+                return new ContentResult
+                {
+                    Content = "Пользователи не найдены!",
+                    ContentType = "application/json",
+                    StatusCode = 400
+                };
+            }
+
+            return Ok(users);
         }
     }
 }

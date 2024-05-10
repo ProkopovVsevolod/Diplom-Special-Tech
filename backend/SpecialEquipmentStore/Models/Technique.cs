@@ -41,6 +41,6 @@ namespace SpecialEquipmentStore.Models
         /// Id типа техники
         /// </summary>
         [Required]
-        public int IdTypeOfTechnique { get; set; }
+        public int TypeOfTechniqueId { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SpecialEquipmentStore.Models;
 
 namespace SpecialEquipmentStore
@@ -16,6 +12,7 @@ namespace SpecialEquipmentStore
         public DbSet<TypeOfTechnique> TypeOfTechnique { get; set; }
         public DbSet<Technique> Technique { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderTechnique> OrderTechnique { get; set; }
 
         public SpecialEquipmentStoreDbContext()
         {
