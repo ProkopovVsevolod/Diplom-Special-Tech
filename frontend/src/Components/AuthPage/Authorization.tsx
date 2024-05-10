@@ -3,6 +3,7 @@ import { FC } from "react";
 import { AuthService } from "../../services/auth.service";
 import { IAuthData } from "../../interfaces/auth.interface";
 import styles from "./auth.module.scss";
+import { validatorData } from "./settingsForValidator";
 
 
 const Authorization: FC = () => {
@@ -12,7 +13,7 @@ const Authorization: FC = () => {
     });
 
     const onSubmit:SubmitHandler<IAuthData> = ( data ) => {
-        AuthService.sendData(data, "http://localhost:5001/auth")
+        AuthService.sendAuthData(data, "/Login")
     }
 
     return (
@@ -22,27 +23,14 @@ const Authorization: FC = () => {
 
                 <div className={styles.inputWrapper}>
                     <input placeholder="Почта" className={styles.input}{
-                        ...register("email", {
-                            required: "Почта обязательна для заполнения",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-                                message: "Введите корректный Email"
-                            }
-                        })} 
+                        ...register("email", validatorData.email)} 
                         type="email"/>
                     {errors.email && <p className={styles.error}>{errors.email.message}</p>}
                 </div>
 
-                
                 <div className={styles.inputWrapper}>
                     <input placeholder="Пароль" className={styles.input}{
-                        ...register("password", {
-                            required: "Пароль обязателен для заполнения",
-                            pattern: {
-                                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                                message: "Пароль должен быть > 8 символов"
-                            },
-                        })} 
+                        ...register("password", validatorData.password)} 
                         type="password"
                     />
                     {errors.password && <p className={styles.error}>{errors.password.message}</p>}

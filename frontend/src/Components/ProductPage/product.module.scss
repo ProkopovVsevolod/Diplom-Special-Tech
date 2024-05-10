@@ -1,3 +1,5 @@
+@import "./../App/vars.scss";
+
 .section {
     margin-bottom: 80px;
 }
@@ -14,8 +16,7 @@
 }
 .row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 }
 
 .tab_button_wrapper {
@@ -33,4 +34,15 @@
 
 .tab_content {
     width: 70%;
+}
+
+.button {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: $brand-color;
+    border-radius: 12px;
+}
+
+.characterCol > * {
+    margin-bottom: 20px;
 }
