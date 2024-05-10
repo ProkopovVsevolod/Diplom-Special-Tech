@@ -18,7 +18,7 @@ namespace SpecialEquipmentStore.Dto
         /// <summary>
         /// Логин
         /// </summary>
-        public string Login { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Пароль

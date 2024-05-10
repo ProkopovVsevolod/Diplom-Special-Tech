@@ -17,7 +17,7 @@ namespace SpecialEquipmentStore.Models
         /// Логин пользователя
         /// </summary>
         [Required]
-        public string Login { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Пароль пользователя
