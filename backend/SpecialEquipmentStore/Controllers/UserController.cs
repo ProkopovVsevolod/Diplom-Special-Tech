@@ -39,7 +39,7 @@ namespace SpecialEquipmentStore.Controllers
                     StatusCode = 400
                 };
             }
-
+            
             await _userBusiness.Register(userData);
 
             return Ok();

@@ -52,7 +52,7 @@ namespace SpecialEquipmentStore.Controllers
         public async Task<IActionResult> EditTechnique([FromBody] TechniqueDto techniqueData)
         {
             var technique = await _techniqueBusiness.EditTechnique(techniqueData);
-
+            
             if (technique == null)
             {
                 return new ContentResult
@@ -98,7 +98,7 @@ namespace SpecialEquipmentStore.Controllers
         public async Task<IActionResult> GetTechniquesByTypeOfTechniqueId(int id)
         {
             var technique = await _techniqueBusiness.GetTechniquesByTypeOfTechniqueId(id);
-
+            
             if (technique == null)
             {
                 return new ContentResult
@@ -131,7 +131,7 @@ namespace SpecialEquipmentStore.Controllers
                     StatusCode = 400
                 };
             }
-
+            
             return Ok(typesOfTechnique);
         }
     }

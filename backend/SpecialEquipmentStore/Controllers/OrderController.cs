@@ -30,8 +30,7 @@ namespace SpecialEquipmentStore.Controllers
 
             if (orders == null)
             {
-                return new ContentResult
-                {
+                return new ContentResult {
                     Content = "Не удалось получить заказы!",
                     ContentType = "application/json",
                     StatusCode = 400
@@ -73,7 +72,7 @@ namespace SpecialEquipmentStore.Controllers
         public async Task<IActionResult> GetOrderById(int id)
         {
             var order = await _orderBusiness.GetOrderById(id);
-
+            
             if (order == null)
             {
                 return new ContentResult

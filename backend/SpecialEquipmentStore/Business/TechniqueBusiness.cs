@@ -70,7 +70,7 @@ namespace SpecialEquipmentStore.Business
         public async Task<IEnumerable<TechniqueDto>> GetTechniquesByTypeOfTechniqueId(int id)
         {
             var techniques = await _techniqueRepository.GetTechniquesByTypeOfTechniqueId(id);
-
+            
             return _mapper.Map<IEnumerable<TechniqueDto>>(techniques);
         }
 
@@ -78,7 +78,7 @@ namespace SpecialEquipmentStore.Business
         public async Task<IEnumerable<TypeOfTechniqueDto>> GetTypesOfTechnique()
         {
             var typesOfTechnique = await _techniqueRepository.GetTypesOfTechnique();
-
+            
             return _mapper.Map<IEnumerable<TypeOfTechniqueDto>>(typesOfTechnique);
         }
     }

@@ -43,18 +43,18 @@ namespace SpecialEquipmentStore.Business
                 if (technique == null)
                 {
                     continue;
-                }
+                }    
 
                 technique.Count -= 1;
                 await _techniqueRepository.EditTechnique(technique);
 
                 await _orderTechniqueRepository.AddOrderTechnique(new OrderTechnique
-                {
+                { 
                     OrderId = order.Id,
                     TechniqueId = technique.Id
                 });
             }
-
+            
             return await GetOrderById(order.Id);
         }
 

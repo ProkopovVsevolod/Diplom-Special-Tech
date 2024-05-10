@@ -48,7 +48,7 @@ namespace SpecialEquipmentStore
                             Ñharacteristic = "Ìàññà: 5ò; Âûñîòà: 35ì",
                             TypeOfTechniqueId = 1
                         }
-                    );
+                    ); 
                     db.SaveChanges();
                 }
 
