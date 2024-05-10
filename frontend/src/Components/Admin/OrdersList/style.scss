@@ -1,0 +1,76 @@
+.table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+
+	&__edit-btn {
+		padding: 10px;
+		border-radius: 8px;
+		color: white;
+		background-color: rgb(58, 111, 235);
+	}
+
+	&__delete-btn {
+		padding: 10px;
+		border-radius: 8px;
+		color: white;
+		background-color: red;
+	}
+}
+
+.table thead th {
+	font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+}
+
+.table thead tr th:first-child {
+	border-radius: 8px 0 0 8px;
+}
+
+.table thead tr th:nth-child(1) {
+	width: 8%;
+}
+
+.table thead tr th:nth-child(2) {
+	width: 8%;
+}
+
+.table thead tr th:nth-child(3) {
+	width: 15%;
+}
+
+.table thead tr th:nth-child(4) {
+	width: 15%;
+}
+
+.table thead tr th:last-child {
+	border-radius: 0 8px 8px 0;
+}
+
+.table tbody td {
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+
+	&:last-child {
+		padding: 0;
+	}
+}
+
+.table tbody tr:nth-child(even){
+	background: #f3f3f3;
+}
+
+.table tbody tr td:first-child {
+	border-radius: 8px 0 0 8px;
+}
+
+.table tbody tr td:last-child {
+	border-radius: 0 8px 8px 0;
+}

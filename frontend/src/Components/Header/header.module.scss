@@ -29,7 +29,15 @@
 }
 
 .logo {
-    margin-right: 20%;
+    margin-right: 9%;
+
+    & a {
+        font-size: 30px;
+    }
+
+    & span {
+        font-size: 35px;
+    }
 }
 
 .list {

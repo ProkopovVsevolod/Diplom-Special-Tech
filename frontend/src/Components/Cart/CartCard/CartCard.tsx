@@ -1,25 +1,17 @@
 import { FC } from "react";
 import "./style.scss";
+import { ITechData } from "../../../interfaces/tech.interfaces";
 
-interface ICardProps {
-    card: {
-        id: string;
-        url:string;
-        title: string;
-        date: string;
-        price: number;
-    }
-    
-}
+const CardCart: FC<{card: ITechData}> = ({card}) => {
+    const {id, name, price} = card;
 
-const CardCart: FC<ICardProps> = ({card}) => {
-    const {id, url, title, date, price} = card;
+
     return (
-        <div className="card" id={id}>
-            <img className="card__img" src={url} alt={`изображение ${title}`} />
+        <div className="card" key={id}>
+            <img className="card__img" src={''} alt={`изображение ${name}`} />
             <div className="card__info">
-                <p className="card__title">{title}</p>
-                <p className="card__date">{date}</p>
+                <p className="card__title">{name}</p>
+                <p className="card__date">{}</p>
                 <p className="card__price">{price} ₽</p>
             </div>
             

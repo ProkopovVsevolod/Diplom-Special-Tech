@@ -1,10 +1,13 @@
 import { FC } from "react";
-import { ICardData } from "../../interfaces/tech.interfaces";
+import { ITechData } from "../../interfaces/tech.interfaces";
 import styles from "./card.module.scss";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { addTechToOrder } from "../../store/order/order.slice";
 
 
-const Card: FC<{data: ICardData}> = ({data}) => {
+const Card: FC<{data: ITechData}> = ({data}) => {
+    const dispath = useAppDispatch();
     const {name, price, id} = data;
     console.log(data)
 
@@ -13,7 +16,7 @@ const Card: FC<{data: ICardData}> = ({data}) => {
             <img  className={styles.img} src="" alt={`Изображение `} />
             <h3 className={styles.title}>{name}</h3>
             <p>{price} за смену</p>
-            <p className={styles.button}>Добавить в заказ</p>
+            <p className={styles.button} onClick={() => dispath(addTechToOrder(data))}>Добавить в заказ</p>
         </Link>
     );
 }

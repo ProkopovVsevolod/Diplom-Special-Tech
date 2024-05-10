@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICardData } from "../interfaces/tech.interfaces";
+import { ITechData } from "../interfaces/tech.interfaces";
 
 const tech = axios.create({
     baseURL: "https://localhost:5001/api/Technique"
@@ -9,7 +9,7 @@ const tech = axios.create({
 export const ProductSercvices = {
     async getTechByType(id: string) {
         try {
-            const responseFromServer = await tech.get<ICardData[]>("/GetTechniquesByTypeOfTechniqueId/" + id);
+            const responseFromServer = await tech.get<ITechData[]>("/GetTechniquesByTypeOfTechniqueId/" + id);
             return responseFromServer.data
         } catch (err) {
             console.log(err)
@@ -18,7 +18,7 @@ export const ProductSercvices = {
 
     async getTechById(id: string) {
         try {
-            const responseFromServer = await tech.get<ICardData>("/GetTechniqueById/" + id);
+            const responseFromServer = await tech.get<ITechData>("/GetTechniqueById/" + id);
             return responseFromServer.data
         } catch (err) {
             console.log(err)

@@ -1,4 +1,4 @@
-export interface ICardData {
+export interface ITechData {
     count: number;
     id: number;
     idTypeOfTechnique: number;

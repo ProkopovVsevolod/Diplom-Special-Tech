@@ -16,7 +16,7 @@
 }
 .row {
     display: flex;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 }
 
 .tab_button_wrapper {
@@ -37,6 +37,7 @@
 }
 
 .button {
+    margin-top: 20px;
     padding: 20px;
     background-color: $brand-color;
     border-radius: 12px;

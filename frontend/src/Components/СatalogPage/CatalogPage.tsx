@@ -65,10 +65,9 @@ const CatalogPage: FC = () => {
                 {isFetching ? <h1>Загрузка данных</h1> : <></> }
 
                 {techData?.length ? techData.map((tech)=> {
-                    return <Card data={tech}/>
+                    return <Card key={tech.id} data={tech}/>
                 }) : <h1>Данные не найдены</h1>}
             </div>
-            
             
         </>
     );
