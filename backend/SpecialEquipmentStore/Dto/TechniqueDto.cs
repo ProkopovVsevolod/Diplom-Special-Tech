@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SpecialEquipmentStore.Dto
+﻿namespace SpecialEquipmentStore.Dto
 {
     /// <summary>
     /// ДТО техники
@@ -38,7 +33,7 @@ namespace SpecialEquipmentStore.Dto
         /// <summary>
         /// Id типа техники
         /// </summary>
-        public int IdTypeOfTechnique { get; set; }
+        public int TypeOfTechniqueId { get; set; }
 
     }
 }

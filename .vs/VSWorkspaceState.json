@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend"
   ],
-  "SelectedNode": "\\SpecialEquipmentStore.sln",
+  "SelectedNode": "\\backend\\SpecialEquipmentStore.sln",
   "PreviewInSolutionExplorer": false
 }

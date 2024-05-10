@@ -1,0 +1,29 @@
+@import "./../App/vars";
+
+.footer {
+    padding: 50px 10%;
+    display: flex;
+    justify-content: space-between;
+    color: #B4B4B4;
+    background-color: $footer-color;
+
+    &__title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    &__link {
+        color: #B4B4B4;
+        font-size: 20px;
+    }
+
+    &__column {
+
+    }
+
+    &__text {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+}

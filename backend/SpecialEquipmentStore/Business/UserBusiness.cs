@@ -2,9 +2,7 @@
 using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpecialEquipmentStore.Business
@@ -40,11 +38,16 @@ namespace SpecialEquipmentStore.Business
                 userDto.Id = null;
                 return userDto;
             }
-            else
-            {
-                var user = await _userRepository.GetUser(userDto);
-                return _mapper.Map<UserDto>(user);
-            }
+
+            var user = await _userRepository.GetUser(userDto);
+            return _mapper.Map<UserDto>(user);
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
+        {
+            var users = await _userRepository.GetAllUsers();
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
     }
 }

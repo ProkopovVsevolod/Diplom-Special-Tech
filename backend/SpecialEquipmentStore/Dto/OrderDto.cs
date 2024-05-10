@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SpecialEquipmentStore.Dto
 {
@@ -16,14 +14,14 @@ namespace SpecialEquipmentStore.Dto
         public int Id { get; set; }
 
         /// <summary>
-        /// Id техники
+        /// Список Id техники
         /// </summary>
-        public int IdTechnique { get; set; }
+        public IEnumerable<int> TechniqueIds { get; set; }
 
         /// <summary>
         /// Id пользователя
         /// </summary>
-        public int IdUser { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Телефон

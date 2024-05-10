@@ -1,8 +1,6 @@
 ﻿using SpecialEquipmentStore.Dto;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpecialEquipmentStore.Contracts
@@ -24,5 +22,11 @@ namespace SpecialEquipmentStore.Contracts
         /// <param name="userDto"> ДТО пользователя для авторизации </param>
         /// <returns> Объект пользователя </returns>
         Task<User> GetUser(UserDto userDto);
+
+        /// <summary>
+        /// Получить список пользователей
+        /// </summary>
+        /// <returns> Список пользователей </returns>
+        Task<IEnumerable<User>> GetAllUsers();
     }
 }

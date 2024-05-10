@@ -1,0 +1,30 @@
+.auth {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        padding: 70px 90px;
+    }
+
+    &__title {
+        font-size: 48px;
+        line-height: 58px;
+        color: $brand-color;
+        margin-bottom: 70px;
+    }
+
+    input {
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 40px;
+        }
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+}

@@ -1,7 +1,6 @@
-﻿using SpecialEquipmentStore.Contracts;
-using SpecialEquipmentStore.Dto;
+﻿using Microsoft.EntityFrameworkCore;
+using SpecialEquipmentStore.Contracts;
 using SpecialEquipmentStore.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,25 +22,25 @@ namespace SpecialEquipmentStore.Repositories
         /// <inheritdoc/>
         public async Task<IEnumerable<TypeOfTechnique>> GetTypesOfTechnique()
         {
-            return _specialEquipmentStoreDbContext.TypeOfTechnique
+            return await _specialEquipmentStoreDbContext.TypeOfTechnique
                 .Select(tot => tot)
-                .ToList();
+                .ToListAsync();
         }
 
         /// <inheritdoc/>
         public async Task<IEnumerable<Technique>> GetTechniquesByTypeOfTechniqueId(int id)
         {
-            return _specialEquipmentStoreDbContext.Technique
-                .Where(t => t.IdTypeOfTechnique == id)
+            return await _specialEquipmentStoreDbContext.Technique
+                .Where(t => t.TypeOfTechniqueId == id)
                 .Select(t => t)
-                .ToList();
+                .ToListAsync();
         }
 
         /// <inheritdoc/>
         public async Task<Technique> GetTechniqueById(int id)
         {
-            return _specialEquipmentStoreDbContext.Technique
-                .FirstOrDefault(t => t.Id == id);
+            return await _specialEquipmentStoreDbContext.Technique
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         /// <inheritdoc/>

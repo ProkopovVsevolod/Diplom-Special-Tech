@@ -1,0 +1,35 @@
+.header {
+    background-color: #FBFBFB;
+    display: flex;
+    justify-content: space-between;
+
+    &__logo {
+
+        span {
+            font-size: 30px;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 29px;
+        }
+    }
+
+    &__nav {
+        
+        ul {
+            display: flex;
+        }
+
+        li a{
+            margin-right: 30px;
+        }
+
+    }
+
+    &__cart {
+
+    }
+
+    &__account {
+
+    }
+}
